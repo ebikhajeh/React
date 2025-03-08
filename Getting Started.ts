@@ -10,6 +10,7 @@ we need :
 --------------------------------
   cd My-project
   npm install
+  code .
   npm run dev
 
 
