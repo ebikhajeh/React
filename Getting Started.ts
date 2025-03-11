@@ -12,6 +12,9 @@ we need :
   npm install
   code .
   npm run dev
+---------------------------------
+
+npm install bootstrap@latest  ( import 'bootstrap/dist/css/bootstrap.css' )
 
 
 
