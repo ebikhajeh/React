@@ -1,6 +1,7 @@
 we need : 
           node -v
           vscode + prettier extension (code/prefrences/settings => search for (format on save) )
+                    + ES7 extension
 
 -> npm create vite@latest
             Y
