@@ -1,0 +1,78 @@
+mkdir Backend
+cd Backend
+-----------
+npm init -y
+-----------
+npm install express
+-----------
+touch index.js
+-----------
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// روت اصلی
+app.get('/', (req, res) => {
+  res.send('سلام! سرور شما با موفقیت ران شده است.');
+});
+
+// اجرای سرور
+app.listen(PORT, () => {
+  console.log(`سرور روی پورت ${PORT} در حال اجراست`);
+});
+------------
+node index.js
+------------
+
+Backend/
+├── node_modules/
+├── src/
+│   ├── controllers/
+│   │   └── user.controller.js
+│   ├── routes/
+│   │   └── user.routes.js
+│   ├── services/
+│   │   └── user.service.js
+│   ├── models/
+│   │   └── user.model.js
+│   ├── middlewares/
+│   │   └── auth.middleware.js
+│   ├── utils/
+│   │   └── logger.js
+│   ├── config/
+│   │   └── db.js
+│   └── app.js
+├── index.js
+├── package.json
+
+--------------------------
+src/
+└── routes/
+    ├── user.routes.js
+    ├── product.routes.js
+    ├── order.routes.js
+    └── auth.routes.js
+--------------------------
+// src/routes/user.routes.js
+
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/user.controller');
+
+// GET /users
+router.get('/', userController.getAllUsers);
+
+// GET /users/:id
+router.get('/:id', userController.getUserById);
+
+// POST /users
+router.post('/', userController.createUser);
+
+// PUT /users/:id
+router.put('/:id', userController.updateUser);
+
+// DELETE /users/:id
+router.delete('/:id', userController.deleteUser);
+
+module.exports = router;
+-------------------------------------
