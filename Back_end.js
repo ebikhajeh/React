@@ -14,8 +14,10 @@
                     
                     module.exports = db;
 
-3. index.js
+3. setup.js
+            console.log("🔧 Setting up database...");
             const db = require('./db/database');
+            console.log("✅ Setup complete.");
 
 4. Create tables based on the project: 
    models/initModels.js
@@ -81,8 +83,12 @@
                                             }
                                           });
                                         -------------------------------------------------------------------
-5.index.js
-          require('./models/initModels');
+5.setup.js
+            console.log("🔧 Setting up database...");
+            const db = require('./db/database');
+            require('./models/initModels');
+            console.log("✅ Setup complete.");
+         
 
 6.models/seedCashier.js
                         const cashier = [
@@ -105,11 +111,27 @@
                           });
                           console.log('✅ Initial list of Cigarettes was entered successfully');
                         }
-                        
                         module.exports = seedCashier;
 
 
-7. index.js
+8. setup.js
+            console.log("🔧 Setting up database...");
+            const db = require('./db/database');
+            require('./models/initModels');
+            
+            const seedCigarettes = require('./models/seedCigarettes');
+            const seedMonthlyPlan = require('./models/seedMonthlyPlan');
+            const seedCashier = require('./models/seedCashier');
+            const seedCurrentInventory = require('./models/seedCurrentInventory');
+                
+            seedCigarettes();
+            seedMonthlyPlan(db);
+            seedCurrentInventory(db);
+            seedCashier();
+
+            console.log("✅ Setup complete.");
+
+9. index.js
             const cigaretteRoutes = require('./routes/cigaretteRoutes');
             app.use('/cigarettes', cigaretteRoutes);
             
@@ -117,7 +139,7 @@
             app.use('/cashier', cashierRoutes);
 
 
-8. routes/cigaretteRoutes
+10. routes/cigaretteRoutes
                           const express = require('express');
                           const router = express.Router();
                           const controller = require('../controllers/cigaretteController');
@@ -131,7 +153,7 @@
                           module.exports = router;
 
 
-9. controllers/cigaretteController
+11. controllers/cigaretteController
                                   const cigaretteService = require("../services/cigaretteService");
                                   
                                   const getTodayCigarettes = async (req, res) => {
@@ -153,7 +175,7 @@
                                   };
 
 
-10. services/cigaretteService
+12. services/cigaretteService
                               const db = require('../db/database');
                               function getCigarettesForToday() {
                                 return new Promise((resolve, reject) => {
@@ -188,4 +210,14 @@
                               module.exports = {
                                 getCigarettesForToday,
                               };
+
+13. package.json
+                "scripts": {
+                     "start": "node index.js",
+                     "setup": "node setup.js"
+                  },
+--------------------------------------------
+npm run setup
+npm start
+--------------------------------------------
 
