@@ -1,1 +1,1 @@
-[use] (./Alert.tsx)
+[use](./Alert.tsx)
