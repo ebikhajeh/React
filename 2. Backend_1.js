@@ -36,5 +36,5 @@ app.listen(port, () => {
   "start": "node server.js"
 }
 ------------------------------------------
-7. npm start  (o
+7. npm start  (npm run start)
 
